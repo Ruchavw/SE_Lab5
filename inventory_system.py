@@ -8,7 +8,9 @@ from datetime import datetime
 # Global variable
 stock_data = {}
 
-def add_item(item="default", qty=0, logs=[]):
+def add_item(item="default", qty=0, logs=None):
+    if logs is None:
+        logs=[]
     if not item:
         return
     stock_data[item] = stock_data.get(item, 0) + qty
