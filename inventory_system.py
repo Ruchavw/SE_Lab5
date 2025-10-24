@@ -1,3 +1,7 @@
+"""Inventory System Module
+This script manages inventory items — adding, removing, saving, and checking stock levels.
+"""
+
 import json
 import logging
 from datetime import datetime
