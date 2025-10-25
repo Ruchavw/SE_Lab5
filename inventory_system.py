@@ -79,6 +79,6 @@ def main():
     save_data()
     load_data()
     print_data()
-    eval("print('eval used')")  # dangerous
+    print("Eval removed — printed safely.")
 
 main()
