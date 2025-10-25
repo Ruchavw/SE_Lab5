@@ -9,7 +9,17 @@ from datetime import datetime
 stock_data = {}
 
 def add_item(item="default", qty=0, logs=None):
-    """Adds a new item to the stock with quantity validation."""
+    """Add a new item or increase quantity in the stock.
+
+    Args:
+        item (str | int): The name or ID of the item.
+        qty (int | str): Quantity to be added.
+        logs (list, optional): List to store log entries.
+
+    Notes:
+        Performs type validation, prevents negative or invalid quantities,
+        and appends a log entry for every addition.
+    """
     global stock_data
 
     if logs is None:
@@ -35,6 +45,14 @@ def add_item(item="default", qty=0, logs=None):
     logs.append(f"{str(datetime.now())}: Added {qty} of {item}")
 
 def remove_item(item, qty):
+    """Remove an item or decrease its quantity from stock.
+
+    Args:
+        item (str | int): The item to remove.
+        qty (int): Quantity to remove.
+
+    Handles missing items and logs an error if removal fails.
+    """
     try:
         stock_data[item] -= qty
         if stock_data[item] <= 0:
@@ -43,25 +61,55 @@ def remove_item(item, qty):
         print(f"Error occurred while removing item: {e}")
 
 def get_qty(item):
+    """Return the quantity of a specific item from stock.
+
+    Args:
+        item (str | int): The item name or ID.
+
+    Returns:
+        int: Quantity available for the item.
+    """
     return stock_data[item]
 
 def load_data(file="inventory.json"):
+    """Load stock data from a JSON file.
+    Args:
+        file (str): Path to the inventory file.
+    Notes:
+        Opens the file with UTF-8 encoding for safety."""
     with open(file, "r", encoding="utf-8") as f:
         global stock_data
         stock_data = json.loads(f.read())
         f.close()
 
 def save_data(file="inventory.json"):
+    """Save current stock data to a JSON file.
+
+    Args:
+        file (str): Path to the inventory file.
+
+    Notes:
+        Writes JSON with UTF-8 encoding to ensure cross-platform compatibility.
+    """
     with open(file, "w", encoding="utf-8") as f:
         f.write(json.dumps(stock_data))
         f.close()
 
 def print_data():
+    """Print all current items and their quantities."""
     print("Items Report")
     for i in stock_data:
         print(i, "->", stock_data[i])
 
 def check_low_items(threshold=5):
+    """Return a list of items with quantities below a threshold.
+
+    Args:
+        threshold (int): Minimum acceptable quantity.
+
+    Returns:
+        list[str]: Items with stock lower than the threshold.
+    """
     result = []
     for i in stock_data:
         if stock_data[i] < threshold:
@@ -69,6 +117,7 @@ def check_low_items(threshold=5):
     return result
 
 def main():
+    """Main function to demonstrate the inventory system workflow."""
     add_item("apple", 10)
     add_item("banana", -2)
     add_item(123, "ten")  # invalid types, no check
