@@ -9,10 +9,28 @@ from datetime import datetime
 stock_data = {}
 
 def add_item(item="default", qty=0, logs=None):
+    """Adds a new item to the stock with quantity validation."""
+    global stock_data
+
     if logs is None:
         logs=[]
     if not item:
         return
+    
+    # Validate types
+    if not isinstance(item, (str, int)):
+        print("Error: Item name or ID must be a string or integer.")
+        return
+
+    try:
+        qty = int(qty)
+        if qty < 0:
+            print("Error: Quantity cannot be negative.")
+            return
+    except ValueError:
+        print("Error: Quantity must be a number.")
+        return
+
     stock_data[item] = stock_data.get(item, 0) + qty
     logs.append(f"{str(datetime.now())}: Added {qty} of {item}")
 
