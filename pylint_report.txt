@@ -1,8 +1,7 @@
 ************* Module inventory_system
 inventory_system.py:11:0: C0116: Missing function or method docstring (missing-function-docstring)
-inventory_system.py:17:16: C0209: Formatting a regular string which could be an f-string (consider-using-f-string)
 inventory_system.py:19:0: C0116: Missing function or method docstring (missing-function-docstring)
-inventory_system.py:24:4: W0702: No exception type(s) specified (bare-except)
+inventory_system.py:24:11: W0718: Catching too general exception Exception (broad-exception-caught)
 inventory_system.py:27:0: C0116: Missing function or method docstring (missing-function-docstring)
 inventory_system.py:30:0: C0116: Missing function or method docstring (missing-function-docstring)
 inventory_system.py:31:8: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
@@ -17,5 +16,5 @@ inventory_system.py:53:0: C0116: Missing function or method docstring (missing-f
 inventory_system.py:64:4: W0123: Use of eval (eval-used)
 
 ------------------------------------------------------------------
-Your code has been rated at 6.86/10 (previous run: 4.80/10, +2.06)
+Your code has been rated at 7.06/10 (previous run: 6.86/10, +0.20)
 
