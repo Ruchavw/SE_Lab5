@@ -1,5 +1,6 @@
 """Inventory System Module
-This script manages inventory items — add_ing, removing, saving, and checking stock levels.
+This script manages inventory items —
+    add_ing, removing, saving, and checking stock levels.
 """
 
 import json
@@ -7,6 +8,7 @@ from datetime import datetime
 
 # Global variable
 stock_data = {}
+
 
 def add_item(item="default", qty=0, logs=None):
     """Add a new item or increase quantity in the stock.
@@ -23,10 +25,10 @@ def add_item(item="default", qty=0, logs=None):
     global stock_data
 
     if logs is None:
-        logs=[]
+        logs = []
     if not item:
         return
-    
+
     # Validate types
     if not isinstance(item, (str, int)):
         print("Error: Item name or ID must be a string or integer.")
@@ -44,6 +46,7 @@ def add_item(item="default", qty=0, logs=None):
     stock_data[item] = stock_data.get(item, 0) + qty
     logs.append(f"{str(datetime.now())}: Added {qty} of {item}")
 
+
 def remove_item(item, qty):
     """Remove an item or decrease its quantity from stock.
 
@@ -60,6 +63,7 @@ def remove_item(item, qty):
     except Exception as e:
         print(f"Error occurred while removing item: {e}")
 
+
 def get_qty(item):
     """Return the quantity of a specific item from stock.
 
@@ -71,6 +75,7 @@ def get_qty(item):
     """
     return stock_data[item]
 
+
 def load_data(file="inventory.json"):
     """Load stock data from a JSON file.
     Args:
@@ -81,6 +86,7 @@ def load_data(file="inventory.json"):
         global stock_data
         stock_data = json.loads(f.read())
         f.close()
+
 
 def save_data(file="inventory.json"):
     """Save current stock data to a JSON file.
@@ -95,11 +101,13 @@ def save_data(file="inventory.json"):
         f.write(json.dumps(stock_data))
         f.close()
 
+
 def print_data():
     """Print all current items and their quantities."""
     print("Items Report")
     for i in stock_data:
         print(i, "->", stock_data[i])
+
 
 def check_low_items(threshold=5):
     """Return a list of items with quantities below a threshold.
@@ -116,6 +124,7 @@ def check_low_items(threshold=5):
             result.append(i)
     return result
 
+
 def main():
     """Main function to demonstrate the inventory system workflow."""
     add_item("apple", 10)
@@ -129,5 +138,6 @@ def main():
     load_data()
     print_data()
     print("Eval removed — printed safely.")
+
 
 main()
