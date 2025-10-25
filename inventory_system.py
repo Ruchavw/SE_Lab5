@@ -21,8 +21,8 @@ def remove_item(item, qty):
         stock_data[item] -= qty
         if stock_data[item] <= 0:
             del stock_data[item]
-    except:
-        pass
+    except Exception as e:
+        print(f"Error occurred while removing item: {e}")
 
 def get_qty(item):
     return stock_data[item]
